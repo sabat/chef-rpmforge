@@ -17,9 +17,20 @@
 # limitations under the License.
 #
 
-rpmforge_path_arch = node['kernel']['machine'].match(/^i\d86$/) ? 'i386' : 'x86_64'
-rpmforge_pkg_arch = node['kernel']['machine']
-rpmforge_pkg_url = node['rpmforge']['rpm_url'].sub(/__PATH_ARCH__/, rpmforge_path_arch).sub(/__PKG_ARCH__/, rpmforge_pkg_arch)
+platform_version = node['platform_version'].match(/^(\d)/)[1]
+host_arch = node['kernel']['machine']
+
+rpmforge_pkg_arch = host_arch
+rpmforge_path_arch = if host_arch == 'i686' && platform_version <= 5
+    'i386'
+  else
+    host_arch
+  end
+
+rpmforge_pkg_url = node['rpmforge']['rpm_url']
+    .sub(/__PATH_ARCH__/, rpmforge_path_arch)
+    .sub(/__PKG_ARCH__/, rpmforge_pkg_arch)
+    .sub(/__PLATFORM_VERSION__/, platform_version)
 
 # Add the rpmforge repo so we can install common packages on redhat
 # distros later in the run list.  http://dag.wieers.com/rpm/FAQ.php#B2
