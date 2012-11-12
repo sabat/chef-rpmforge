@@ -17,12 +17,16 @@
 # limitations under the License.
 #
 
+rpmforge_path_arch = node['kernel']['machine'].match(/^i\d86$/) ? 'i686' : 'x86_64'
+rpmforge_pkg_arch = node['kernel']['machine']
+rpmforge_pkg_url = node['rpmforge']['rpm_url'].sub(/__PATH_ARCH__/, rpmforge_path_arch).sub(/__PKG_ARCH__/, rpmforge_pkg_arch)
+
 # Add the rpmforge repo so we can install common packages on redhat
 # distros later in the run list.  http://dag.wieers.com/rpm/FAQ.php#B2
 case node["platform"]
 when "centos", "redhat", "fedora"
   execute "add_rpmforge_repo" do
-    command "rpm -Uhv #{node['rpmforge']['rpm_url']}"
+    command "rpm -Uhv #{rpmforge_pkg_url}"
     not_if { File.exists?("/etc/yum.repos.d/rpmforge.repo") }
   end
 end
