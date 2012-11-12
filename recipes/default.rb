@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-platform_version = node['platform_version'].match(/^(\d)/)[1]
+platform_version = node['platform_version'].match(/^(\d)/)[1].to_i
 host_arch = node['kernel']['machine']
 
 rpmforge_pkg_arch = host_arch
