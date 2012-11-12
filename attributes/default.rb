@@ -19,3 +19,4 @@
 #
 
 default['rpmforge']['rpm_url'] = "http://apt.sw.be/redhat/el__PLATFORM_VERSION__/en/__PATH_ARCH__/rpmforge/RPMS/rpmforge-release-0.5.2-2.el__PLATFORM_VERSION__.rf.__PKG_ARCH__.rpm"
+
