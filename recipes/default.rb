@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-rpmforge_path_arch = node['kernel']['machine'].match(/^i\d86$/) ? 'i686' : 'x86_64'
+rpmforge_path_arch = node['kernel']['machine'].match(/^i\d86$/) ? 'i386' : 'x86_64'
 rpmforge_pkg_arch = node['kernel']['machine']
 rpmforge_pkg_url = node['rpmforge']['rpm_url'].sub(/__PATH_ARCH__/, rpmforge_path_arch).sub(/__PKG_ARCH__/, rpmforge_pkg_arch)
 
