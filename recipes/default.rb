@@ -28,9 +28,9 @@ rpmforge_path_arch = if host_arch == 'i686' && platform_version <= 5
   end
 
 rpmforge_pkg_url = node['rpmforge']['rpm_url']
-  .sub(/__PATH_ARCH__/, rpmforge_path_arch)
-  .sub(/__PKG_ARCH__/, rpmforge_pkg_arch)
-  .sub(/__PLATFORM_VERSION__/, platform_version.to_s)
+  .gsub(/__PATH_ARCH__/, rpmforge_path_arch)
+  .gsub(/__PKG_ARCH__/, rpmforge_pkg_arch)
+  .gsub(/__PLATFORM_VERSION__/, platform_version.to_s)
 
 # Add the rpmforge repo so we can install common packages on redhat
 # distros later in the run list.  http://dag.wieers.com/rpm/FAQ.php#B2
