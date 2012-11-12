@@ -20,8 +20,8 @@
 platform_version = node['platform_version'].match(/^(\d)/)[1].to_i
 host_arch = node['kernel']['machine']
 
-rpmforge_pkg_arch = host_arch
-rpmforge_path_arch = if host_arch == 'i686' && platform_version <= 5
+rpmforge_path_arch = host_arch
+rpmforge_pkg_arch = if host_arch == 'i686' && platform_version <= 5
     'i386'
   else
     host_arch
